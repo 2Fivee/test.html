@@ -6,8 +6,9 @@
     <title>Konversi Suhu</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f8ff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('https://www.example.com/temperature-theme.jpg') no-repeat center center fixed;
+            background-size: cover;
             margin: 0;
             padding: 0;
             display: flex;
@@ -17,21 +18,28 @@
         }
 
         .container {
-            background-color: #ffffff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            padding: 20px 30px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 30px;
             text-align: center;
-            width: 300px;
+            width: 350px;
+            animation: pop-in 0.5s ease;
+        }
+
+        @keyframes pop-in {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         h2 {
             color: #333;
             margin-bottom: 20px;
+            font-size: 1.5rem;
         }
 
         label {
-            font-size: 16px;
+            font-size: 1rem;
             color: #555;
         }
 
@@ -40,29 +48,38 @@
             padding: 10px;
             margin: 15px 0;
             border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
+            border-radius: 10px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: box-shadow 0.3s;
+        }
+
+        input[type="number"]:focus {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+            outline: none;
         }
 
         button {
             background-color: #007bff;
             color: #ffffff;
             border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            font-size: 16px;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 1rem;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
         }
 
         button:hover {
             background-color: #0056b3;
+            transform: scale(1.05);
         }
 
         #hasil {
-            margin-top: 15px;
-            font-size: 16px;
+            margin-top: 20px;
+            font-size: 1rem;
             color: #333;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -78,11 +95,14 @@
     <script>
         function konversiSuhu() {
             const celsius = parseFloat(document.getElementById('celsius').value);
+            const hasilElement = document.getElementById('hasil');
             if (isNaN(celsius)) {
-                document.getElementById('hasil').innerText = "Mohon masukkan angka yang valid.";
+                hasilElement.innerText = "Mohon masukkan angka yang valid.";
+                hasilElement.style.color = "#ff0000";
             } else {
                 const fahrenheit = (celsius * 9/5) + 32;
-                document.getElementById('hasil').innerText = `Suhu dalam Fahrenheit: ${fahrenheit.toFixed(2)}`;
+                hasilElement.innerText = `Suhu dalam Fahrenheit: ${fahrenheit.toFixed(2)}`;
+                hasilElement.style.color = "#333";
             }
         }
     </script>
